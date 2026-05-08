@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html, body {
+  background: linear-gradient(180deg, #0b1020 0%, #0a0f1f 100%);
+  color: #e5e9f5;
+  min-height: 100vh;
+}
+
+@layer components {
+  .card {
+    @apply bg-panel border border-edge rounded-xl;
+  }
+  .card-hover {
+    @apply transition hover:border-edge/80 hover:bg-panel2;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium;
+  }
+  .input {
+    @apply bg-panel2 border border-edge rounded-md px-3 py-2 text-sm text-ink placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-amet/50 focus:border-amet/40;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition;
+  }
+  .btn-primary {
+    @apply btn bg-amet text-white hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn bg-panel2 text-ink hover:bg-edge border border-edge;
+  }
+  .btn-danger {
+    @apply btn bg-red-600/90 text-white hover:bg-red-600;
+  }
+  .label {
+    @apply text-xs font-medium text-muted uppercase tracking-wide;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+}
+
+.scrollbar-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #1f2746; border-radius: 8px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
