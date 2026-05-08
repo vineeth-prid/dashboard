@@ -106,7 +106,7 @@ export function updateTask(input: UpdateTaskInput): Task {
   }
   if (input.status === "done") {
     fields.push("completed_at = datetime('now')");
-  } else if (input.status && input.status !== "done") {
+  } else if (input.status !== undefined) {
     fields.push("completed_at = NULL");
   }
   fields.push("updated_at = datetime('now')");
