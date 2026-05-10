@@ -32,6 +32,12 @@ npm run dev
 
 Open http://localhost:3000 — the app works immediately with manual task creation. To get email-to-task auto-creation, configure the OAuth providers below.
 
+To populate a few example tasks across AMET / Rihal / PRID so you can see the company tabs and assistant briefing in action:
+
+```bash
+npm run seed
+```
+
 ## Connecting Gmail
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/) → create a project.

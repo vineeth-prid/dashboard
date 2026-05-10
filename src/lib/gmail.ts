@@ -9,9 +9,9 @@ export const GMAIL_SCOPES = [
 ];
 
 export function gmailOAuthClient(): OAuth2Client {
-  const id = process.env.GOOGLE_CLIENT_ID;
-  const secret = process.env.GOOGLE_CLIENT_SECRET;
-  const redirect = process.env.GOOGLE_REDIRECT_URI;
+  const id = process.env.GOOGLE_CLIENT_ID?.trim();
+  const secret = process.env.GOOGLE_CLIENT_SECRET?.trim();
+  const redirect = process.env.GOOGLE_REDIRECT_URI?.trim();
   if (!id || !secret || !redirect) {
     throw new Error("Missing GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / GOOGLE_REDIRECT_URI");
   }
@@ -20,8 +20,10 @@ export function gmailOAuthClient(): OAuth2Client {
 
 export function gmailAuthUrl(state: string): string {
   return gmailOAuthClient().generateAuthUrl({
+    response_type: "code",
     access_type: "offline",
     prompt: "consent",
+    include_granted_scopes: true,
     scope: GMAIL_SCOPES,
     state,
   });

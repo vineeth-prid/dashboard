@@ -4,9 +4,9 @@ import { Client } from "@microsoft/microsoft-graph-client";
 export const MS_SCOPES = ["openid", "profile", "offline_access", "User.Read", "Mail.Read"];
 
 export function msalClient(): ConfidentialClientApplication {
-  const id = process.env.MS_CLIENT_ID;
-  const secret = process.env.MS_CLIENT_SECRET;
-  const tenant = process.env.MS_TENANT_ID || "common";
+  const id = process.env.MS_CLIENT_ID?.trim();
+  const secret = process.env.MS_CLIENT_SECRET?.trim();
+  const tenant = process.env.MS_TENANT_ID?.trim() || "common";
   if (!id || !secret) {
     throw new Error("Missing MS_CLIENT_ID / MS_CLIENT_SECRET");
   }
@@ -20,7 +20,7 @@ export function msalClient(): ConfidentialClientApplication {
 }
 
 export function msAuthRedirect(): string {
-  const redirect = process.env.MS_REDIRECT_URI;
+  const redirect = process.env.MS_REDIRECT_URI?.trim();
   if (!redirect) throw new Error("Missing MS_REDIRECT_URI");
   return redirect;
 }
