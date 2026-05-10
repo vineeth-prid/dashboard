@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { msExchangeCode } from "@/lib/microsoft";
 import { upsertAccount } from "@/lib/accounts";
+import { publicUrl } from "@/lib/url";
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
   if (!code) {
-    return NextResponse.redirect(new URL("/settings?error=missing_code", req.url));
+    return NextResponse.redirect(publicUrl("/settings?error=missing_code", req));
   }
   try {
     const result = await msExchangeCode(code);
@@ -18,10 +19,10 @@ export async function GET(req: NextRequest) {
       refresh_token: null,
       token_expires_at: result.expiresOn?.toISOString() ?? null,
     });
-    return NextResponse.redirect(new URL("/settings?connected=microsoft", req.url));
+    return NextResponse.redirect(publicUrl("/settings?connected=microsoft", req));
   } catch (err) {
     return NextResponse.redirect(
-      new URL(`/settings?error=${encodeURIComponent((err as Error).message)}`, req.url),
+      publicUrl(`/settings?error=${encodeURIComponent((err as Error).message)}`, req),
     );
   }
 }
